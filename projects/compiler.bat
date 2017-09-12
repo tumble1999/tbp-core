@@ -25,8 +25,8 @@ goto :eof
 
 
 :compile
-powershell -Command "Compress-Archive -U -Path %1\* -DestinationPath '%1"
-if "%3"==installer (
+powershell -Command "Compress-Archive -U -Path %1\* -DestinationPath %1"
+if "%3"=="i" (
 rename %1.zip data%2
 copy "%~dp0installer.bat" "%~n1-installer.bat"
 mkdir "%~0installer-files"

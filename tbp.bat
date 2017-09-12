@@ -26,9 +26,12 @@ call :compile
 goto :eof
 
 :new-project
-mkdir "%~1"
-cd "%~1"
-if exist .tbp goto :eof
+mkdir %1
+cd %1
+if exist .tbp (
+  start explorer "%~1"
+  goto :eof
+)
 if not exist .git git init
 
 mkdir lib
@@ -59,8 +62,8 @@ goto:eof
 :compile
 set /p tbp-folder=drag and drop the project folder here and press enter:
 if not exist "%tbp-folder:"=%\.tbp" (
-echo This folder is not a TumbleBatch Project folder.
-goto compile
+  echo This folder is not a TumbleBatch Project folder.
+  goto compile
 )
 
 call :list-compile-operations
@@ -85,12 +88,12 @@ if %type_choice%==2 (
 )
 set /p ins=Would you like an installer[y/n]?
 if %ins%==y (
-  call compiler.bat %tbp-folder% %operation% %type% installer
+  call projects/compiler.bat %tbp-folder% %operation% %type% installer
 ) else (
   if %ins%==Y (
-    call compiler.bat %tbp-folder% %operation% %type% installer
+    call projects/compiler.bat %tbp-folder% %operation% %type% installer
   ) else (
-    call compiler.bat %tbp-folder% %operation% %type%
+    call projects/compiler.bat %tbp-folder% %operation% %type%
   )
 )
 goto :eof
