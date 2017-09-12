@@ -3,7 +3,7 @@
 File structure standerd for batch projects.
 
 ## preperation
-download [git](/)
+download [git](https://git-scm.com/downloads).
 
 ## Setup
 Run `tbp.bat` to create a project using this file structure
