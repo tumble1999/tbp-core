@@ -56,6 +56,30 @@ cd %tbp-core%
 goto:eof
 
 :compile
-echo Coming soon
-pause
+set /p tbp-folder=drag and drop the project folder here and press enter:
+
+if not exist %tbp-folder%\.tbp (
+echo This folder is not a TumbleBatch Project folder.
 goto :eof
+)
+
+call :list-compile-operations
+echo.
+set /p operation=(C or D):
+echo.
+call :list-types
+echo.
+set /p type=(P or L):
+
+call compiler.bat %tbp-folder% %operation% %type$
+goto :eof
+
+:list-compile-operations
+echo Compile
+echo Decompile
+goto :eof
+
+:list-compile-types
+echo Project (.tbp)
+echo Library (.tbpl)
+goto:eof
