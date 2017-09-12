@@ -35,7 +35,7 @@ if exist .tbp (
 if not exist .git git init
 
 mkdir lib
-git submodules add https://github.com/tumble1999/tbp-core lib/tbp-core
+git submodule add https://github.com/tumble1999/tbp-core lib/tbp-core
 xcopy %tbp-core%\lib\* lib /e
 copy %tbp-core%\load-libs.bat %cd%
 copy %tbp-core%\.gitmodules %cd%
@@ -88,10 +88,10 @@ if %type_choice%==2 (
 )
 set /p ins=Would you like an installer[y/n]?
 if %ins%==y (
-  call projects/compiler.bat %tbp-folder% %operation% %type% installer
+  call projects/compiler.bat %tbp-folder% %operation% %type% i
 ) else (
   if %ins%==Y (
-    call projects/compiler.bat %tbp-folder% %operation% %type% installer
+    call projects/compiler.bat %tbp-folder% %operation% %type% i
   ) else (
     call projects/compiler.bat %tbp-folder% %operation% %type%
   )
