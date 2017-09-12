@@ -34,6 +34,7 @@ if not exist .git git init
 mkdir lib
 xcopy %tbp-core%\lib\* lib /e
 copy %tbp-core%\load-libs.bat .
+copy %tbp-core%\.gitmodules .
 
 echo @if not "%%1"=="debug" @echo off>>%~n1.bat
 echo setlocal enabledelayedexpansion>>%~n1.bat
