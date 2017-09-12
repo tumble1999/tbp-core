@@ -58,14 +58,9 @@ goto:eof
 
 :compile
 set /p tbp-folder=drag and drop the project folder here and press enter:
-if not exist %tbp-folder%\.tp (
-echo This is not a Tumble Batch Project.
-goto compile
-)
-
-if not exist %tbp-folder%\.tbp (
+if not exist "%tbp-folder:"=%\.tbp" (
 echo This folder is not a TumbleBatch Project folder.
-goto :eof
+goto compile
 )
 
 call :list-compile-operations
