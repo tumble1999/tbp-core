@@ -1,5 +1,5 @@
 @if not "%1"=="debug" @echo off
-setlocal enabledelayedexpansion
+setlocal EnableDelayedExpansion
 set tbp-core=%~dp0
 call :display-menu
 echo.
@@ -16,7 +16,7 @@ goto :eof
 cls
 if %1==1 (
 echo Create Where? - To paste, just right click.
-echo (e.g. c:\Users\%USERNAME%\Documents\TumbleBatchProjects\Project1)
+echo [e.g. %USERPROFILE%\Documents\TumbleBatchProjects\Project1]
 set /p loc=:
 call :new-project %loc%
 )
@@ -32,6 +32,7 @@ if exist .tbp goto :eof
 if not exist .git git init
 
 mkdir lib
+git submodules add https://github.com/tumble1999/tbp-core lib/tbp-core
 xcopy %tbp-core%\lib\* lib /e
 copy %tbp-core%\load-libs.bat .
 copy %tbp-core%\.gitmodules .
@@ -57,6 +58,10 @@ goto:eof
 
 :compile
 set /p tbp-folder=drag and drop the project folder here and press enter:
+if not exist %tbp-folder%\.tp (
+echo This is not a Tumble Batch Project.
+goto compile
+)
 
 if not exist %tbp-folder%\.tbp (
 echo This folder is not a TumbleBatch Project folder.
@@ -65,21 +70,42 @@ goto :eof
 
 call :list-compile-operations
 echo.
-set /p operation=(C or D):
+set /p op_choice=Choice:
+if %op_choice%==1 (
+  set operation=C
+)
+if %op_choice%==2 (
+ set operation=D
+)
 echo.
-call :list-types
-echo.
-set /p type=(P or L):
 
-call compiler.bat %tbp-folder% %operation% %type$
+call :list-compile-types
+echo.-choice
+set /p type_choice=:
+if %type_choice%==1 (
+  set type=P
+)
+if %type_choice%==2 (
+ set type=L
+)
+set /p ins=Would you like an installer[y/n]?
+if %ins%==y (
+  call compiler.bat %tbp-folder% %operation% %type% installer
+) else (
+  if %ins%==Y (
+    call compiler.bat %tbp-folder% %operation% %type% installer
+  ) else (
+    call compiler.bat %tbp-folder% %operation% %type%
+  )
+)
 goto :eof
 
 :list-compile-operations
-echo Compile
-echo Decompile
+echo 1. Compile
+echo 2. Decompile
 goto :eof
 
 :list-compile-types
-echo Project (.tbp)
-echo Library (.tbpl)
+echo 1. Project (.tbp)
+echo 2. Library (.tbpl)
 goto:eof

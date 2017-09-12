@@ -2,12 +2,11 @@
 
 File structure standerd for batch projects.
 
-#preperation
-
+## preperation
+download [git](/)
 
 ## Setup
 Run `tbp.bat` to create a project using this file structure
 
 ## Add Libriries to projects
-In a project run this command
-'git submodule add [url] lib/[name]'
+download the `.tbpl` file and put it in the `lib` folder.
