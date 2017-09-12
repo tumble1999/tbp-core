@@ -26,16 +26,16 @@ call :compile
 goto :eof
 
 :new-project
-mkdir %1
-cd %1
+mkdir "%~1"
+cd "%~1"
 if exist .tbp goto :eof
 if not exist .git git init
 
 mkdir lib
 git submodules add https://github.com/tumble1999/tbp-core lib/tbp-core
 xcopy %tbp-core%\lib\* lib /e
-copy %tbp-core%\load-libs.bat .
-copy %tbp-core%\.gitmodules .
+copy %tbp-core%\load-libs.bat %cd%
+copy %tbp-core%\.gitmodules %cd%
 
 echo @if not "%%1"=="debug" @echo off>>"%~n1.bat"
 echo setlocal enabledelayedexpansion>>"%~n1.bat"
