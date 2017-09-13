@@ -53,7 +53,7 @@ echo.>>%~n1.bat
 echo :main>>%~n1.bat
 echo.>>%~n1.bat
 echo echo Hello World!>>%~n1.bat
-echo.>%~n1.bat
+echo.>>%~n1.bat
 echo goto :eof>>%~n1.bat
 
 
