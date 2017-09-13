@@ -3,23 +3,24 @@ REM CHECK IF IN A TBP PROJECT
 if not exist .tbp (
   goto :eof
 )
-pause
 
 REM LOAD PROJECT LIBRARIES
 for /d %%L in ("lib\*") do (
-  set path=%cd%\%%L
+  set path=%cd%\%%L%path%
   set %cd%=path
   cd %%L
-  call load-libs.bat
-  cd ../..
+  start /wait load-libs.bat
+  cd../..
 )
 
 for /d %%L in ("lib\*.tbpl") do (
   project-tools\compile %%L D L
-  set path=%cd%\%%L
+  set file=%%L
+  set path=%cd%\%file:0,-5%%path%
   set %cd%=path
   cd %%L
-  call /wait load-libs.bat
-  cd ../..
+  start /wait load-libs.bat
+  cd../..
 )
+
 exit
