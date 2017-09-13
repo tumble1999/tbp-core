@@ -6,5 +6,6 @@ set name=%~n0
 set name=%name:-installer=%
 mkdir %name%
 
-rename data.tbp data.zip
+copy data.tbp data.zip
 powershell -Command "Expand-Archive -LiteralPath data.zip -DestinationPath %name%"
+del data.zip /q

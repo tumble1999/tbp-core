@@ -40,7 +40,8 @@ if "%~4"=="i" (
 goto :eof
 
 :decompile
-rename %1 "%~dpn1.zip"
+copy %1 "%~dpn1.zip"
 mkdir "%~dpn1"
 powershell -Command "Expand-Archive -LiteralPath %~dpn1.zip -DestinationPath %~dpn1"
+del "%~dpn1.zip" /q
 goto :eof

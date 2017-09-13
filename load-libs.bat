@@ -1,23 +1,27 @@
-@echo off
+@echo on
 REM CHECK IF IN A TBP PROJECT
 if not exist .tbp (
   goto :eof
 )
 
+git submodule sync
+git submodule update
+
 rem LOAD PROJECT LIBRARIES
-for /d %%L in ("lib\*") do (
-  set lib=%%L
-  set path=!cd!\!lib!;!path!
-  cd !lib!
+for /d %%l in ("lib\*") do (
+echo %%l
+  set path=!cd!\%%l;!path!
+  cd %%l
   call load-libs.bat
-  cd ../..
+  uncd %%l
 )
 
-for /d %%L in ("lib\*.tbpl") do (
-  set lib=%%L
-  project-tools\compile !lib! D L
-  set path=!cd!\!lib:0,-5!;!path!
-  cd !lib!
+for %%l in ("lib\*.tbpl") do (
+  echo %%l
+  pause
+  compiler %%l D
+  set path=!cd!\%%~nl;!path!
+  cd %%~nl
   call load-libs.bat
-  cd ../..
+  uncd %%~nl
 )
