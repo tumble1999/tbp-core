@@ -6,7 +6,7 @@ if not exist .tbp (
 
 REM LOAD PROJECT LIBRARIES
 for /d %%L in ("lib\*") do (
-  set path=%cd%\%%L%path%
+  set path=%cd%\%%L;%path%
   set %cd%=path
   cd %%L
   start /wait load-libs.bat
@@ -16,7 +16,7 @@ for /d %%L in ("lib\*") do (
 for /d %%L in ("lib\*.tbpl") do (
   project-tools\compile %%L D L
   set file=%%L
-  set path=%cd%\%file:0,-5%%path%
+  set path=%cd%\%file:0,-5%;%path%
   set %cd%=path
   cd %%L
   start /wait load-libs.bat
