@@ -85,12 +85,12 @@ if %type_choice%==2 (
 )
 set /p ins=Would you like an installer[y/n]?
 if %ins%==y (
-  call project-tools/compiler.bat %tbp-folder% %operation% %type% i
+  call compiler.bat %tbp-folder% %operation% %type% i
 ) else (
   if %ins%==Y (
-    call project-tools/compiler.bat %tbp-folder% %operation% %type% i
+    call compiler.bat %tbp-folder% %operation% %type% i
   ) else (
-    call project-tools/compiler.bat %tbp-folder% %operation% %type%
+    call compiler.bat %tbp-folder% %operation% %type%
   )
 )
 goto :eof
