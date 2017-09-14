@@ -5,7 +5,7 @@ if not exist .tbp (
 )
 
 for /d %%l in ("lib\*") do (
-  if exist "%%~l.tbpl" (
+  if exist "%%~dpnl.tbpl" (
     del %%l /q
   )
 )
