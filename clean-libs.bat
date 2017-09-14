@@ -4,8 +4,8 @@ if not exist .tbp (
   goto :eof
 )
 
-for /d %%l in ("lib\*") do (
-  if exist "%%~dpnl.tbpl" (
-    del %%l /q
+for %%l in ("lib\*.tbpl") do (
+  if exist %%~dpnl (
+    del "%%~dpnl" /q
   )
 )

@@ -14,10 +14,8 @@ git submodule update
 
 rem LOAD PROJECT LIBRARIES
 for /d %%l in ("lib\*") do (
-  if "%~$PATH:1"=="" (
-    set path=!cd!\%%l;!path!
+    set PATH=!cd:"=!\%%~l;!PATH!
     cd %%l
-    load libs
+    load-libs
     cd ../..
-  )
 )
