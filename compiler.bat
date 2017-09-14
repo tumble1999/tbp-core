@@ -26,16 +26,19 @@ goto :eof
 
 
 :compile
-powershell -Command "Compress-Archive -U -Path "%~1\*" -DestinationPath %1"
+set compDir=%~dp1
+if "%5"=="ci" set comDir=%~dp1\ci
+powershell -Command "Compress-Archive -U -Path "%compDir%%~n1\*" -DestinationPath %1"
 if "%~4"=="i" (
-  rename "%~1.zip" data!ext:"=!
+  rename "%compDir%%~n1.zip" data!ext:"=!
   mkdir "%~dp0installer-files"
-  move "%~dp1data!ext:"=!" "%~dp0installer-files"
+  move "%compDir%data!ext:"=!" "%~dp0installer-files"
   copy "%~dp0installer.bat" "%~dp0installer-files\%~n1-installer.bat"
-  powershell -Command "Compress-Archive -U -Path '%~dp0installer-files\*' -DestinationPath '%~1'"
+  powershell -Command "Compress-Archive -U -Path '%~dp0installer-files\*' -DestinationPath '%compDir%%~n1'"
   del "%~dp0installer-files\*" /q
 ) else (
-  rename "%~1.zip" %~n1!ext:"=!
+  if "%4"=="ci" set comDir=%~dp1\ci
+  rename "%compDir%%~n1.zip" %~n1!ext:"=!
 )
 goto :eof
 
