@@ -6,7 +6,7 @@ if not exist .tbp (
 )
 
 for %%l in ("lib\*.tbpl") do (
-  compiler %%l D
+  %~dp0compiler %%l D
 )
 
 git submodule sync
