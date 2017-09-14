@@ -6,7 +6,7 @@ File structure standerd for batch projects.
 download [git](https://git-scm.com/downloads).
 
 ## Setup
-Download [here](https://ci.appveyor.com/project/tumble1999/tbp-core/build/artifacts)
+Download [here](https://github.com/tumble1999/tbp-core/releases)
 Run `tbp.bat` to create a project using this file structure
 
 ## Add Libriries to projects
