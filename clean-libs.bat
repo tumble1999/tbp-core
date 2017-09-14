@@ -1,11 +1,11 @@
 @echo off
 REM CHECK IF IN A TBP PROJECT
-if not exist .tbp (
+if not exist %cd%\.tbp (
   goto :eof
 )
 
 for %%l in ("lib\*.tbpl") do (
   if exist %%~dpnl (
-    del "%%~dpnl" /q
+    rmdir "%%~dpnl" /q /s
   )
 )
